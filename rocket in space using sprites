@@ -17,11 +17,40 @@ class Spritesinhertantss(pygame.sprite.Sprite):
         self.rect.y=y
 
 rocket=Spritesinhertantss("rocket.png",200,200)
+gos=pygame.sprite.Group()
+gos.add(rocket)
 
 while run:
     space=pygame.image.load("space.png")
     screen.blit(space,(0,0))
+    gos.draw(screen)
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             run=False
+
+    keypressed=pygame.key.get_pressed()
+    if keypressed[pygame.K_UP]:
+        rocket.rect.y=rocket.rect.y-5
+
+    if keypressed[pygame.K_DOWN]:
+        rocket.rect.y=rocket.rect.y+5
+        
+    if keypressed[pygame.K_RIGHT]:
+        rocket.rect.x=rocket.rect.x+5
+
+    if keypressed[pygame.K_LEFT]:
+        rocket.rect.x=rocket.rect.x-5
+
+    if rocket.rect.top<0:
+        rocket.rect.top=0
+
+    if rocket.rect.bottom>600:
+        rocket.rect.bottom=600
+
+    if rocket.rect.right>600:
+        rocket.rect.right=600
+
+    if rocket.rect.left<0:
+        rocket.rect.left=0
+        
     pygame.display.update()
